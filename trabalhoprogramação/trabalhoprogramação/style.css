@@ -1,0 +1,23 @@
+
+.hero{
+    background-color: black;
+    color: white;
+    padding: 60px 20px;
+}
+
+
+#imagemPrincipal{
+    width: 420px;
+    height: 260px;
+    border-radius: 10px;
+}
+
+
+.escuro{
+    background-color: #121212;
+    color: white;
+}
+
+.justificar-texto{
+    text-align: justify;
+}
