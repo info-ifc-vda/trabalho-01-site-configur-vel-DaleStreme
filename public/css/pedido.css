@@ -1,0 +1,224 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #111;
+  font-size: 14px;
+}
+
+/* Navbar */
+.navbar-brand {
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -1px;
+}
+.nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111 !important;
+}
+
+/* Caminho (breadcrumb) */
+.caminho {
+  font-size: 11px;
+  color: #6c757d;
+}
+.caminho a {
+  color: #6c757d;
+  text-decoration: none;
+}
+.caminho a:hover {
+  text-decoration: underline;
+}
+
+/* Passos (stepper) */
+.stepper {
+  font-size: 12px;
+  font-weight: 600;
+}
+.step-number {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+.step-active .step-number {
+  background-color: #111;
+  color: #fff;
+}
+.step-done .step-number {
+  background-color: #146c43;
+  color: #fff;
+}
+.step-inactive {
+  color: #adb5bd;
+}
+.step-inactive .step-number {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+.step-line {
+  width: 30px;
+  height: 1px;
+  background-color: #dee2e6;
+}
+
+/* Cartões */
+.cartao {
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 24px;
+}
+.rotulo {
+  font-size: 11px;
+  color: #6c757d;
+  display: block;
+}
+.valor {
+  font-weight: bold;
+  font-size: 13px;
+}
+.caixa-info {
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  padding: 12px 16px;
+}
+
+/* Itens do pedido */
+.item-img {
+  width: 64px;
+  height: 64px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.item-img img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+/* Campos do formulário */
+.form-control:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+.form-check-input:checked {
+  background-color: #111;
+  border-color: #111;
+}
+.form-check-input:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.15);
+}
+
+/* Formas de pagamento */
+.opcao-pagamento {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.opcao-pagamento:has(input:checked) {
+  border: 2px solid #111;
+  padding: 13px 15px;
+}
+.opcao-pagamento input {
+  margin: 0;
+}
+
+/* Resumo */
+.resumo-card {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* Botões */
+.btn-preto {
+  background-color: #111;
+  color: #fff;
+  border-radius: 50px;
+  padding: 12px;
+  font-weight: 600;
+  border: none;
+}
+.btn-preto:hover {
+  background-color: #333;
+  color: #fff;
+}
+.btn-contorno {
+  background-color: #fff;
+  color: #111;
+  border: 1px solid #111;
+  border-radius: 50px;
+  padding: 12px;
+  font-weight: 600;
+}
+.btn-contorno:hover {
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+/* Topo do pedido confirmado */
+.circulo-sucesso {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #146c43;
+  color: #fff;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.protocolo {
+  display: inline-block;
+  background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 50px;
+  padding: 4px 16px;
+  font-size: 11px;
+}
+.titulo-confirmacao {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+/* Passos "O que acontece agora" */
+.passo {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.passo:last-child {
+  margin-bottom: 0;
+}
+.passo-numero {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  color: #6c757d;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.passo-ok {
+  background-color: #146c43;
+  color: #fff;
+}

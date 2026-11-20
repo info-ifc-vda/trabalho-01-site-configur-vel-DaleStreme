@@ -1,0 +1,127 @@
+<%- include('../partials/header') %>
+<%- include('../partials/menu') %>
+
+<link rel="stylesheet" href="/css/admin-produtos.css">
+
+<main class="container py-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-box-seam"></i>
+                Cadastro de Produto
+            </h4>
+        </div>
+        <div class="card-body">
+            <form action="/admin/produtos/cadastrar" method="POST" enctype="multipart/form-data" onsubmit="return validarTamanhos()">
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label class="form-label">Nome do produto</label>
+                        <input type="text" name="nome" class="form-control" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Categoria</label>
+                        <select name="categoria" class="form-select" required>
+                            <option value="">Selecione uma categoria</option>
+                            <% for (let i = 0; i < categorias.length; i++) { %>
+                                <option value="<%= categorias[i].nome %>">
+                                    <%= categorias[i].nome %>
+                                </option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Valor</label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input type="number" name="valor" class="form-control" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Marca</label>
+                        <input type="text" name="marca" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Tamanhos disponíveis</label>
+                        <div class="d-flex flex-wrap gap-3">
+                            <% for (let tam = 30; tam <= 45; tam++) { %>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tamanho" value="<%= tam %>" id="tam<%= tam %>">
+                                    <label class="form-check-label" for="tam<%= tam %>"><%= tam %></label>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-link btn-sm p-0" onclick="marcarTodos(true)">Marcar todos</button>
+                            <span class="text-muted">|</span>
+                            <button type="button" class="btn btn-link btn-sm p-0" onclick="marcarTodos(false)">Desmarcar todos</button>
+                        </div>
+                        <div id="avisoTamanhos" class="text-danger small mt-2 d-none">
+                            Selecione pelo menos um tamanho.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-check form-switch">
+                            <input type="checkbox" class="form-check-input" name="destaque" id="destaque" value="true">
+                            <label class="form-check-label" for="destaque">
+                                Destacar produto na página inicial
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Imagem</label>
+                        <input type="file" name="imagem" class="form-control" accept="image/*" required>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Descrição</label>
+                    <textarea name="descricao" class="form-control" rows="4"></textarea>
+                </div>
+            
+                <button type="submit" class="btn btn-dark">
+                    <i class="bi bi-check-circle"></i> Cadastrar
+                </button>
+                <a href="/admin/produtos" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Marca ou desmarca todos os tamanhos
+    function marcarTodos(marcar) {
+        document.querySelectorAll('input[name="tamanho"]').forEach(function (campo) {
+            campo.checked = marcar;
+        });
+    }
+
+    // Exige pelo menos um tamanho marcado
+    function validarTamanhos() {
+        const marcados = document.querySelectorAll('input[name="tamanho"]:checked');
+        const aviso = document.getElementById('avisoTamanhos');
+
+        if (marcados.length === 0) {
+            aviso.classList.remove('d-none');
+            return false;
+        }
+
+        aviso.classList.add('d-none');
+        return true;
+    }
+</script>
+
+<%- include('../partials/footer') %>

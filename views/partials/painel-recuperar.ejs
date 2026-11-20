@@ -1,0 +1,31 @@
+<div class="painel-esquerdo">
+  <div>
+    <div class="etiqueta-pequena mb-5">Dentro e fora de campo.</div>
+    <h1 class="titulo-grande"><%- titulo %></h1>
+    <p class="text-secondary mt-3 texto-painel"><%- texto %></p>
+  </div>
+
+  <div class="beneficios-container">
+    <div class="beneficio">
+      <div class="beneficio-icone"><i class="bi bi-box-seam"></i></div>
+      <div>
+        <div class="fw-bold">Seus pedidos, de perto</div>
+        <small class="text-secondary">Acompanhe cada etapa da sua compra.</small>
+      </div>
+    </div>
+
+    <div class="beneficio mb-0">
+      <div class="beneficio-icone"><i class="bi bi-trophy"></i></div>
+      <div>
+        <div class="fw-bold">Seu jogo, seu estilo</div>
+        <small class="text-secondary">Futsal, futebol e society em um só lugar.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between border-top pt-3 mt-3 etiqueta-pequena border-secondary">
+    <% categorias.forEach(categoria => { %>
+      <span><%= categoria.nome %></span>
+    <% }) %>
+  </div>
+</div>

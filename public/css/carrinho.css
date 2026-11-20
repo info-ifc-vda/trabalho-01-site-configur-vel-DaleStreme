@@ -1,0 +1,178 @@
+/* public/css/carrinho.css */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #111;
+  background-color: #ffffff;
+  font-size: 14px;
+}
+
+/* Top Sub-bar */
+.top-bar {
+  font-size: 11px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  color: #6c757d;
+}
+.top-bar a {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+/* Navbar */
+.navbar-brand {
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -1px;
+}
+.nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111 !important;
+}
+
+/* Stepper */
+.stepper {
+  font-size: 12px;
+  font-weight: 600;
+}
+.step-number {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+.step-active .step-number {
+  background-color: #111;
+  color: #fff;
+}
+.step-inactive {
+  color: #adb5bd;
+}
+.step-inactive .step-number {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+.step-line {
+  width: 30px;
+  height: 1px;
+  background-color: #dee2e6;
+}
+
+/* Título */
+.titulo-carrinho {
+  letter-spacing: -1px;
+}
+
+/* Cart Items */
+.product-img-bg {
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-img-bg img {
+  max-height: 90px;
+  object-fit: contain;
+}
+.btn-qty {
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  padding: 2px 12px;
+  background: #fff;
+  font-size: 13px;
+}
+.btn-qty button {
+  border: none;
+  background: none;
+  font-weight: bold;
+  padding: 0 4px;
+  color: #111;
+}
+
+/* Summary Card */
+.summary-card {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
+}
+.total-valor {
+  letter-spacing: -0.5px;
+}
+.btn-black {
+  background-color: #111;
+  color: #fff;
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: 600;
+  border: none;
+}
+.btn-black:hover {
+  background-color: #333;
+  color: #fff;
+}
+.btn-outline-custom {
+  border: 1px solid #e5e5e5;
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: 600;
+  background-color: #fff;
+  color: #111;
+}
+.btn-outline-custom:hover {
+  background-color: #f8f9fa;
+  color: #111;
+}
+
+/* Frete Box */
+.form-frete {
+  max-width: 320px;
+}
+.campo-frete {
+  font-size: 13px;
+}
+.btn-calcular {
+  font-size: 13px;
+  font-weight: 500;
+}
+.frete-card {
+  border: 2px solid #2b2b2b;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.badge-green {
+  width: 12px;
+  height: 12px;
+  background-color: #00875a;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* Coupon Box */
+.coupon-box {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.breadcrumb-item, .breadcrumb-item a {
+  font-size: 11px;
+  color: #6c757d;
+  text-decoration: none;
+}
+
+/* Tamanhos de texto (antes estavam como style dentro do EJS) */
+.texto-mini {
+  font-size: 11px;
+}
+.texto-12 {
+  font-size: 12px;
+}
+.texto-13 {
+  font-size: 13px;
+}

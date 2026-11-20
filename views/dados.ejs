@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= produto[0].nome %> - KickOFF</title>
+    <link rel="icon" href="/icone/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/dados.css">
+  </head>
+  <body>
+
+    <%- include('partials/topbar') %>
+
+    <%
+      // Tamanhos que o produto tem. Se não houver lista cadastrada, libera todos.
+      const todosTamanhos = ['30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45'];
+      let disponiveis = [];
+      if (produto[0].tamanho) {
+        disponiveis = String(produto[0].tamanho).replace(/\s/g, '').split(',').filter(t => /^\d+$/.test(t));
+      }
+      const semLista = disponiveis.length == 0;
+    %>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-2">
+      <div class="container">
+        <a class="navbar-brand py-0 d-flex align-items-center gap-2 text-decoration-none text-dark" href="/">
+  <img src="/icone/Logo2.webp" alt="KICKOFF" style="height: 35px; width: auto; object-fit: contain;">
+</a>
+
+        <div class="collapse navbar-collapse justify-content-center show">
+          <ul class="navbar-nav gap-3 fw-bold">
+            <li class="nav-item"><a class="nav-link" href="/">Destaques</a></li>
+            <% categorias.forEach(categoria => { %>
+              <li class="nav-item"><a class="nav-link" href="/categoria/<%= encodeURIComponent(categoria.nome) %>"><%= categoria.nome %></a></li>
+            <% }); %>
+          </ul>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+          <%- include('partials/conta') %>
+          <a href="/carrinho" class="text-dark fs-5"><i class="bi bi-cart3"></i></a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Conteúdo do Produto -->
+    <div class="container my-5">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-7 d-flex gap-3 pt-0">
+          <div class="main-image-container flex-grow-1">
+            <% if (produto[0].imagem) { %>
+              <img src="/uploads/<%= produto[0].imagem %>" class="img-fluid main-image" alt="<%= produto[0].nome %>" />
+            <% } else { %>
+              <i class="bi bi-image display-1 text-muted"></i>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="col-lg-5 pt-0">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h1 class="h3 fw-bold mb-1"><%= produto[0].nome %></h1>
+              <p class="text-muted small mb-2"><%= produto[0].marca %> | <%= produto[0].categoria %></p>
+            </div>
+            <button type="button" class="btn btn-light rounded-circle">
+              <i class="bi bi-share"></i>
+            </button>
+          </div>
+
+          <!-- Preço -->
+          <div class="mb-3">
+            <span class="fs-3 fw-bold">R$ <%= Number(produto[0].valor).toFixed(2).replace('.', ',') %></span>
+          </div>
+
+          <form action="/carrinho/adicionar/<%= produto[0].id %>" method="POST" onsubmit="return validarTamanho()" class="m-0">
+
+            <!-- Tamanhos -->
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="small fw-bold">Escolha o seu tamanho</span>
+                <% if (!semLista) { %>
+                  <span class="text-muted texto-mini">Tamanhos riscados estão indisponíveis</span>
+                <% } %>
+              </div>
+
+              <div class="alert-box p-2 mb-3 d-flex align-items-center gap-2">
+                <i class="bi bi-info-circle fs-5"></i>
+                <span>Recomendamos usar o calçado por alguns minutos em casa antes do primeiro jogo para garantir o ajuste perfeito ao seu pé.</span>
+              </div>
+
+              <div class="d-flex flex-wrap gap-2">
+                <% todosTamanhos.forEach(tam => { %>
+                  <% const liberado = semLista || disponiveis.includes(tam); %>
+                  <input type="radio" class="btn-check" name="tamanho" id="tam<%= tam %>" value="<%= tam %>"
+                         onchange="document.getElementById('avisoTamanho').classList.add('d-none')"
+                         <%= liberado ? '' : 'disabled' %>>
+                  <label class="size-box" for="tam<%= tam %>"><%= tam %></label>
+                <% }) %>
+              </div>
+
+              <div id="avisoTamanho" class="text-danger small mt-2 d-none">
+                <i class="bi bi-exclamation-circle me-1"></i> Escolha um tamanho para continuar.
+              </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="d-grid gap-2 mb-4">
+              <button type="submit" class="btn btn-black w-100">Adicionar ao carrinho</button>
+              <a href="/" class="btn btn-outline-black rounded-pill py-2 fw-semibold text-center text-decoration-none d-block">Continuar comprando</a>
+            </div>
+
+          </form>
+
+          <!-- Descrição -->
+          <div class="border-top pt-3">
+            <span class="fw-bold">Descrição</span>
+            <p class="text-muted small mt-2"><%= produto[0].descricao %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Não deixa adicionar ao carrinho sem escolher o tamanho
+      function validarTamanho() {
+        const escolhido = document.querySelector('input[name="tamanho"]:checked');
+
+        if (!escolhido) {
+          document.getElementById('avisoTamanho').classList.remove('d-none');
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

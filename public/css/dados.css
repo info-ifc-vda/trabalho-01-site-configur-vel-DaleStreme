@@ -1,0 +1,91 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #111;
+}
+.navbar-brand {
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+}
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111 !important;
+}
+
+/* Imagem do produto */
+.main-image-container {
+  background-color: #f7f7f7;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+}
+.main-image {
+  max-height: 450px;
+  object-fit: contain;
+}
+
+/* Caixas de tamanho */
+.size-box {
+  width: 60px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 0;
+}
+.btn-check:not(:disabled) + .size-box:hover {
+  border-color: #111;
+}
+.btn-check:checked + .size-box {
+  border-color: #111;
+  background-color: #111;
+  color: #fff;
+}
+.btn-check:disabled + .size-box {
+  opacity: 0.35;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.btn-check:focus-visible + .size-box {
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.15);
+}
+
+/* Botões */
+.btn-black {
+  background-color: #111;
+  color: #fff;
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: 600;
+  border: 2px solid #000;
+}
+.btn-black:hover {
+  background-color: #333;
+  color: #fff;
+}
+.btn-outline-black {
+  border: 2px solid #111 !important;
+  color: #111 !important;
+  background-color: transparent !important;
+}
+
+/* Aviso e textos pequenos */
+.alert-box {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.texto-mini {
+  font-size: 11px;
+}

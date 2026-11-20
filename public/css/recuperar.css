@@ -1,0 +1,124 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #111;
+  font-size: 14px;
+}
+
+/* Painel escuro da esquerda */
+.painel-esquerdo {
+  background-color: #050505;
+  color: #fff;
+  border-radius: 8px;
+  min-height: 600px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.etiqueta-pequena {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #adb5bd;
+}
+
+.titulo-grande {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: #fff;
+}
+
+.texto-painel {
+  max-width: 320px;
+  color: #adb5bd;
+}
+
+/* Container dos benefícios centralizado verticalmente */
+.painel-esquerdo .beneficios-container {
+  margin: auto 0;
+  padding: 20px 0;
+}
+
+.beneficio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.beneficio-icone {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  background-color: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Formulário da direita */
+.formulario-recuperar {
+  width: 100%;
+  max-width: 420px;
+}
+
+.form-control:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.btn-preto {
+  background-color: #111;
+  color: #fff;
+  border-radius: 50px;
+  padding: 12px;
+}
+
+.btn-preto:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.campo-codigo {
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 8px;
+}
+
+/* Campo de senha com o olho */
+.campo-senha {
+  position: relative;
+}
+
+.campo-senha .form-control {
+  padding-right: 40px;
+}
+
+.campo-senha .olho {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  color: #555;
+}
+
+/* Ícone da tela de sucesso */
+.icone-sucesso {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #146c43;
+  color: #fff;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KICKOFF - Verificar código</title>
+  <link rel="icon" href="/icone/favicon.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/recuperar.css">
+</head>
+<body>
+
+  <%- include('../partials/navbar-recuperar') %>
+
+  <div class="container-fluid px-4 my-4">
+    <div class="row g-4">
+
+      <div class="col-lg-5">
+        <%- include('../partials/painel-recuperar', {
+          titulo: 'Confira seu<br>e-mail.',
+          texto: 'Digite o código de 6 dígitos que enviamos para continuar.'
+        }) %>
+      </div>
+
+      <div class="col-lg-7 d-flex align-items-center justify-content-center">
+        <div class="formulario-recuperar">
+          <div class="etiqueta-pequena mb-2">Recuperar conta</div>
+          <h3 class="fw-bold">Digite o código</h3>
+          <p class="text-muted small">Enviamos um código de 6 dígitos para <strong><%= email %></strong>.</p>
+
+          <% if (aviso) { %>
+            <div class="alert alert-success py-2 small"><%= aviso %></div>
+          <% } %>
+
+          <% if (erro) { %>
+            <div class="alert alert-danger py-2 small"><%= erro %></div>
+          <% } %>
+
+          <!-- E-mail fictício -->
+          <div class="border rounded p-3 mb-4 bg-light">
+            <p class="small text-muted mb-2">
+              <i class="bi bi-info-circle me-1"></i>
+              Este é um ambiente de demonstração: nenhum e-mail real é enviado. Abra sua caixa de entrada fictícia para ver o código.
+            </p>
+            <a href="/recuperar/caixa-de-entrada" class="btn btn-outline-dark btn-sm rounded-pill w-100">
+              <i class="bi bi-envelope-open me-1"></i> Abrir meu e-mail (simulado)
+            </a>
+          </div>
+
+          <form action="/recuperar/verificar-codigo" method="POST">
+            <label for="codigo" class="form-label small fw-bold">Código de verificação</label>
+            <input type="text" class="form-control campo-codigo mb-3" id="codigo" name="codigo"
+                   maxlength="6" inputmode="numeric" placeholder="000000" required
+                   oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+            <button type="submit" class="btn btn-preto w-100 fw-bold">Confirmar código</button>
+          </form>
+
+          <form action="/recuperar/reenviar" method="POST" class="text-center mt-2">
+            <button type="submit" class="btn btn-link text-dark text-decoration-none small">Não recebeu? Reenviar código</button>
+          </form>
+
+          <div class="text-center">
+            <a href="/recuperar" class="text-dark text-decoration-none small">
+              <i class="bi bi-arrow-left me-1"></i> Usar outro e-mail
+            </a>
+          </div>
+
+          <p class="text-center text-muted small mt-3 mb-0">
+            <i class="bi bi-lock me-1"></i> Seus dados protegidos, seu jogo em foco.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

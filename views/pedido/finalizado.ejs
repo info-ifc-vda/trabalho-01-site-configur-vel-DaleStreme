@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido confirmado - KickOFF</title>
+  <link rel="icon" href="/icone/favicon.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/pedido.css">
+</head>
+<body>
+
+  <%- include('../partials/topbar') %>
+  <%- include('../partials/navbar-recuperar') %>
+
+  <div class="container-fluid px-4 my-3">
+
+    <!-- CAMINHO + PASSOS -->
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="caminho">
+        <a href="/">Início</a> / <a href="/carrinho">Carrinho</a> / Finalizar compra / Pedido confirmado
+      </div>
+
+      <div class="stepper d-flex align-items-center gap-2">
+        <div class="step-done d-flex align-items-center gap-1">
+          <span class="step-number"><i class="bi bi-check-lg"></i></span>
+          <span>Carrinho</span>
+        </div>
+        <span class="step-line"></span>
+        <div class="step-done d-flex align-items-center gap-1">
+          <span class="step-number"><i class="bi bi-check-lg"></i></span>
+          <span>Finalizar compra</span>
+        </div>
+        <span class="step-line"></span>
+        <div class="step-active d-flex align-items-center gap-1">
+          <span class="step-number">3</span>
+          <span>Confirmação</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIRMAÇÃO -->
+    <div class="text-center my-5">
+      <div class="circulo-sucesso mb-3"><i class="bi bi-check-lg"></i></div>
+      <span class="protocolo">Pedido nº <%= pedido.numero %></span>
+      <h1 class="titulo-confirmacao mt-3">Pedido confirmado!</h1>
+      <p class="text-muted small mx-auto" style="max-width: 420px;">
+        Recebemos o seu pedido, <%= pedido.cliente.nome %>. Enviaremos os detalhes para o e-mail <%= pedido.cliente.email %>.
+      </p>
+    </div>
+
+    <div class="row g-4 mx-auto" style="max-width: 1000px;">
+
+      <!-- COLUNA ESQUERDA -->
+      <div class="col-lg-8">
+
+        <!-- RESUMO DO PEDIDO -->
+        <div class="cartao mb-4">
+          <h5 class="fw-bold mb-4">Resumo do seu pedido</h5>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <span class="rotulo">Pedido</span>
+              <span class="valor"><%= pedido.numero %></span>
+            </div>
+            <div class="col-md-6">
+              <span class="rotulo">Realizado em</span>
+              <span class="valor"><%= pedido.data %></span>
+            </div>
+            <div class="col-md-6">
+              <span class="rotulo">Forma de pagamento</span>
+              <span class="valor"><%= pedido.pagamento %></span>
+            </div>
+            <div class="col-md-6">
+              <span class="rotulo">Enviaremos para</span>
+              <span class="valor"><%= pedido.cliente.email %></span>
+            </div>
+          </div>
+
+          <div class="caixa-info mb-3">
+            <span class="rotulo mb-1">Endereço de entrega</span>
+            <span class="small">
+              <%= pedido.endereco.rua %>, <%= pedido.endereco.numero %><% if (pedido.endereco.complemento) { %> - <%= pedido.endereco.complemento %><% } %><br>
+              <%= pedido.endereco.bairro %> - <%= pedido.endereco.cidade %>/<%= pedido.endereco.estado %><br>
+              CEP <%= pedido.endereco.cep %>
+            </span>
+          </div>
+
+          <span class="rotulo mb-1">Produtos</span>
+          <% pedido.itens.forEach(item => { %>
+            <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+              <div class="item-img">
+                <% if (item.imagem) { %>
+                  <img src="/uploads/<%= item.imagem %>" alt="<%= item.nome %>">
+                <% } else { %>
+                  <i class="bi bi-image text-muted fs-4"></i>
+                <% } %>
+              </div>
+              <div class="flex-grow-1">
+                <div class="fw-bold small"><%= item.nome %></div>
+                <small class="text-muted"><%= item.categoria %> | Tamanho: <%= item.tamanho %> | Qtd: <%= item.qtd %></small>
+              </div>
+              <div class="fw-bold small">R$ <%= (item.valor * item.qtd).toFixed(2).replace('.', ',') %></div>
+            </div>
+          <% }) %>
+        </div>
+
+        <!-- O QUE ACONTECE AGORA -->
+        <div class="cartao">
+          <h5 class="fw-bold mb-4">O que acontece agora</h5>
+
+          <div class="passo">
+            <div class="passo-numero passo-ok"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="fw-bold small">Pedido recebido</div>
+              <small class="text-muted">Registramos o pedido <%= pedido.numero %>.</small>
+            </div>
+          </div>
+
+          <div class="passo">
+            <div class="passo-numero">2</div>
+            <div>
+              <div class="fw-bold small">Confirmação do pagamento</div>
+              <small class="text-muted">Vamos confirmar a forma de pagamento escolhida: <%= pedido.pagamento %>.</small>
+            </div>
+          </div>
+
+          <div class="passo">
+            <div class="passo-numero">3</div>
+            <div>
+              <div class="fw-bold small">Envio</div>
+              <small class="text-muted">A entrega acontece em até 5 dias úteis após a confirmação do pagamento.</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUNA DIREITA: VALORES -->
+      <div class="col-lg-4">
+        <div class="cartao">
+          <h6 class="fw-bold mb-3">Valores do pedido</h6>
+
+          <div class="d-flex justify-content-between mb-2 small">
+            <span class="text-muted">Subtotal</span>
+            <span class="fw-semibold">R$ <%= pedido.subtotal.toFixed(2).replace('.', ',') %></span>
+          </div>
+
+          <% if (pedido.desconto > 0) { %>
+            <div class="d-flex justify-content-between mb-2 small">
+              <span class="text-muted">Cupom <%= pedido.cupom.codigo %></span>
+              <span class="text-success fw-semibold">- R$ <%= pedido.desconto.toFixed(2).replace('.', ',') %></span>
+            </div>
+          <% } %>
+
+          <div class="d-flex justify-content-between mb-3 small">
+            <span class="text-muted">Entrega padrão</span>
+            <span class="fw-semibold">R$ <%= pedido.frete.toFixed(2).replace('.', ',') %></span>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-baseline pt-3 border-top mb-4">
+            <span class="fw-bold">Total</span>
+            <span class="fw-bold fs-5">R$ <%= pedido.total.toFixed(2).replace('.', ',') %></span>
+          </div>
+
+          <a href="/" class="btn btn-preto w-100 text-decoration-none">Continuar comprando</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <%- include('../partials/rodape') %>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!-- RODAPÉ -->
+<style>
+  .rodape { background-color: #fff; border-top: 1px solid #e5e5e5; font-size: 14px; }
+  .rodape h6 { font-size: 14px; font-weight: bold; color: #111; margin-bottom: 14px; }
+  .rodape .rodape-destaque a { color: #111; text-decoration: none; display: block; padding: 7px 0; }
+  .rodape .rodape-link a { color: #6c6c6c; text-decoration: none; display: block; padding: 4px 0; font-size: 12px; }
+  .rodape .rodape-destaque a:hover,
+  .rodape .rodape-link a:hover { color: #111; text-decoration: underline; }
+  .rodape .rodape-social a { color: #6c6c6c; font-size: 20px; transition: color 0.2s; }
+  .rodape .rodape-social a:hover { color: #111; }
+  .rodape .rodape-base { border-top: 1px solid #e5e5e5; font-size: 12px; color: #6c6c6c; }
+  .rodape .rodape-base a { color: #6c6c6c; text-decoration: none; }
+  .rodape .rodape-base a:hover { color: #111; text-decoration: underline; }
+</style>
+
+<footer class="rodape mt-5 pt-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- NAVEGUE -->
+      <div class="col-6 col-lg-3 rodape-destaque">
+        <h6>Navegue</h6>
+        <a href="/">Destaques</a>
+        <% categorias.forEach(categoria => { %>
+          <a href="/categoria/<%= categoria.nome %>"><%= categoria.nome %></a>
+        <% }) %>
+      </div>
+
+      <!-- MINHA CONTA -->
+      <div class="col-6 col-lg-3 rodape-link">
+        <h6>Minha conta</h6>
+        <a href="/login">Login do cliente</a>
+        <a href="/cadastro">Cadastro</a>
+        <a href="/carrinho">Carrinho</a>
+      </div>
+
+      <!-- SOBRE -->
+      <div class="col-6 col-lg-3 rodape-link">
+        <h6>Sobre a KICKOFF</h6>
+        <a href="/admin">Acesso Admin</a>
+        <a href="#">Privacidade</a>
+        <a href="#">Termos de uso</a>
+      </div>
+
+      <!-- REDES SOCIAIS + REGIÃO -->
+      <div class="col-6 col-lg-3">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h6>Redes sociais</h6>
+            <div class="rodape-social d-flex gap-3">
+              <a href="https://www.instagram.com/kickoff.br_" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+          <span class="text-muted small d-none d-lg-inline"><i class="bi bi-globe2 me-1"></i>Brasil</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BASE -->
+    <div class="rodape-base d-flex flex-column flex-md-row justify-content-between gap-2 mt-5 py-4">
+      <span class="d-flex gap-3">
+        <a href="#">Política de privacidade</a>
+        <a href="#">Termos de uso</a>
+      </span>
+      <span>© 2026 KICKOFF. Todos os direitos reservados.</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KICKOFF - Nova senha</title>
+  <link rel="icon" href="/icone/favicon.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/recuperar.css">
+</head>
+<body>
+
+  <%- include('../partials/navbar-recuperar') %>
+
+  <div class="container-fluid px-4 my-4">
+    <div class="row g-4">
+
+      <div class="col-lg-5">
+        <%- include('../partials/painel-recuperar', {
+          titulo: 'Quase lá.<br>Crie uma<br>nova senha.',
+          texto: 'Escolha uma senha forte para manter a sua conta KickOFF protegida.'
+        }) %>
+      </div>
+
+      <div class="col-lg-7 d-flex align-items-center justify-content-center">
+        <div class="formulario-recuperar">
+          <div class="etiqueta-pequena mb-2">Recuperar conta</div>
+          <h3 class="fw-bold">Crie uma nova senha</h3>
+          <p class="text-muted small">A nova senha precisa ser diferente da senha atual.</p>
+
+          <% if (erro) { %>
+            <div class="alert alert-danger py-2 small"><%= erro %></div>
+          <% } %>
+
+          <div id="mensagemErro" class="alert alert-danger py-2 small d-none"></div>
+
+          <form action="/recuperar/salvar-senha" method="POST" onsubmit="return validarFormulario()">
+
+            <label for="senha" class="form-label small fw-bold">Nova senha</label>
+            <div class="campo-senha mb-2">
+              <input type="password" class="form-control" id="senha" name="senha" required oninput="verificarSenha()">
+              <button type="button" class="olho" onclick="mostrarOcultar('senha', 'olhoSenha')">
+                <i id="olhoSenha" class="bi bi-eye"></i>
+              </button>
+            </div>
+
+            <div id="avisoTamanho" class="small text-muted mb-3">
+              <i id="iconeTamanho" class="bi bi-circle me-1"></i> Pelo menos 8 caracteres
+            </div>
+
+            <label for="confirmar" class="form-label small fw-bold">Confirmar nova senha</label>
+            <div class="campo-senha mb-3">
+              <input type="password" class="form-control" id="confirmar" name="confirmar" required>
+              <button type="button" class="olho" onclick="mostrarOcultar('confirmar', 'olhoConfirmar')">
+                <i id="olhoConfirmar" class="bi bi-eye"></i>
+              </button>
+            </div>
+
+            <button type="submit" class="btn btn-preto w-100 fw-bold">Salvar nova senha</button>
+          </form>
+
+          <p class="text-center text-muted small mt-3 mb-0">
+            <i class="bi bi-lock me-1"></i> Seus dados protegidos, seu jogo em foco.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Mostra ou esconde a senha
+    function mostrarOcultar(idCampo, idIcone) {
+      const campo = document.getElementById(idCampo);
+      const icone = document.getElementById(idIcone);
+
+      if (campo.type === 'password') {
+        campo.type = 'text';
+        icone.className = 'bi bi-eye-slash';
+      } else {
+        campo.type = 'password';
+        icone.className = 'bi bi-eye';
+      }
+    }
+
+    // Fica verde quando a senha tem 8 caracteres ou mais
+    function verificarSenha() {
+      const senha = document.getElementById('senha').value;
+      const aviso = document.getElementById('avisoTamanho');
+      const icone = document.getElementById('iconeTamanho');
+
+      if (senha.length >= 8) {
+        aviso.className = 'small text-success mb-3';
+        icone.className = 'bi bi-check-circle-fill me-1';
+      } else {
+        aviso.className = 'small text-muted mb-3';
+        icone.className = 'bi bi-circle me-1';
+      }
+    }
+
+    // Confere as senhas antes de enviar
+    function validarFormulario() {
+      const senha = document.getElementById('senha').value;
+      const confirmar = document.getElementById('confirmar').value;
+      const mensagem = document.getElementById('mensagemErro');
+
+      if (senha.length < 8) {
+        mensagem.innerText = 'A senha precisa ter pelo menos 8 caracteres.';
+        mensagem.classList.remove('d-none');
+        return false;
+      }
+
+      if (senha !== confirmar) {
+        mensagem.innerText = 'As senhas não coincidem.';
+        mensagem.classList.remove('d-none');
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
